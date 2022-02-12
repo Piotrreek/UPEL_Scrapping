@@ -58,6 +58,9 @@ namespace Upel_Scrap
                 HtmlDocument ppo_course_html = new HtmlDocument();
                 ppo_course_html.LoadHtml(ppo_course_str);
 
+
+                Console.WriteLine(ppo_course_str);
+
                 // now scrapping ... 
 
 
