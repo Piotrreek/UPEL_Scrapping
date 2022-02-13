@@ -20,13 +20,13 @@ namespace Upel_Scrap
             var LoginAndPassword = SignToWebsite.GetLoginAndPassword();
             var Response = await SignToWebsite.SignIn(Token, LoginAndPassword, httpClient);
 
-            int choice = Scrapping.Choose();
+            int choice = GetPpoGrades.Choose();
             do
             {
                 switch (choice)
                 {
-                    case 1:
-                        await Scrapping.PpoGrades(httpClient);
+                    case 1:            
+                        await GetPpoGrades.PpoGrades(httpClient);
                         break;
                     case 2:
 
@@ -37,7 +37,7 @@ namespace Upel_Scrap
                         Console.WriteLine("Bad input, try again");
                         break;
                 }
-                choice = Scrapping.Choose();
+                choice = GetPpoGrades.Choose();
             } while (true);
         }
     }
