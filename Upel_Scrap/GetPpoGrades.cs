@@ -12,12 +12,6 @@ namespace Upel_Scrap
 {
     class GetPpoGrades
     {
-        public static int Choose()
-        {
-            Console.WriteLine(@$"{Environment.NewLine}What do you want to do on the website ? {Environment.NewLine}1. Get grades and average grade(%) from Basics of Object Oriented Programming {Environment.NewLine}2. ... { Environment.NewLine}5. Exit");
-            Console.Write("What is your choice ?: ");
-            return int.Parse(Console.ReadLine());
-        }
         public static async Task PpoGrades(HttpClient httpClient)
         {
             var PpoCourse = await httpClient.GetAsync("https://upel2.cel.agh.edu.pl/wfiis/course/user.php?mode=grade&id=464&user=2451");

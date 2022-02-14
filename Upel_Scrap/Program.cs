@@ -19,8 +19,8 @@ namespace Upel_Scrap
             var Token = SignToWebsite.GetSecurityToken(HtmlString);
             var LoginAndPassword = SignToWebsite.GetLoginAndPassword();
             var Response = await SignToWebsite.SignIn(Token, LoginAndPassword, httpClient);
-
-            int choice = GetPpoGrades.Choose();
+            
+            int choice = Welcome.Choose();
             do
             {
                 switch (choice)
@@ -29,7 +29,8 @@ namespace Upel_Scrap
                         await GetPpoGrades.PpoGrades(httpClient);
                         break;
                     case 2:
-
+                        List<string> URLs = await TOiSDownloadPDF.GetURLs(httpClient);
+                        await TOiSDownloadPDF.DownloadPdf(httpClient, URLs);
                         break;
                     case 5:
                         return;
@@ -37,7 +38,7 @@ namespace Upel_Scrap
                         Console.WriteLine("Bad input, try again");
                         break;
                 }
-                choice = GetPpoGrades.Choose();
+                choice = Welcome.Choose();
             } while (true);
         }
     }
