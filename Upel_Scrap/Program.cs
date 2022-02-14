@@ -14,11 +14,11 @@ namespace Upel_Scrap
         static async Task Main(string[] args)
         {
             using var httpClient = new HttpClient();
-            var Html = await httpClient.GetAsync("https://upel2.cel.agh.edu.pl/wfiis/login/index.php");
-            var HtmlString = await Html.Content.ReadAsStringAsync();
-            var Token = SignToWebsite.GetSecurityToken(HtmlString);
-            var LoginAndPassword = SignToWebsite.GetLoginAndPassword();
-            var Response = await SignToWebsite.SignIn(Token, LoginAndPassword, httpClient);
+            while (! await SignToWebsite.SignInFun(httpClient))
+            {
+                continue;
+            }
+
             
             int choice = Welcome.Choose();
             do
@@ -33,6 +33,8 @@ namespace Upel_Scrap
                         await TOiSDownloadPDF.DownloadPdf(httpClient, URLs);
                         break;
                     case 5:
+                        Console.WriteLine("Logging out ...");
+
                         return;
                     default:
                         Console.WriteLine("Bad input, try again");

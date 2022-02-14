@@ -53,5 +53,32 @@ namespace Upel_Scrap
             var Content = new FormUrlEncodedContent(Values);
             return  await httpClient.PostAsync("https://upel2.cel.agh.edu.pl/wfiis/login/index.php", Content);
         }
+
+        public static async Task<bool> SignInFun(HttpClient httpClient)
+        {
+            var Html = await httpClient.GetAsync("https://upel2.cel.agh.edu.pl/wfiis/login/index.php");
+            var HtmlString = await Html.Content.ReadAsStringAsync();
+            var Token = SignToWebsite.GetSecurityToken(HtmlString);
+            var LoginAndPassword = SignToWebsite.GetLoginAndPassword();
+            var Response = await SignToWebsite.SignIn(Token, LoginAndPassword, httpClient);
+            return await CheckIfLoggedIn(httpClient);
+        }
+        public static async Task<bool> CheckIfLoggedIn(HttpClient httpClient)
+        {
+            var Html = await httpClient.GetStringAsync("https://upel2.cel.agh.edu.pl/wfiis/");
+            if (Html.Contains("Dostępne kursy"))
+            {
+                Console.WriteLine();
+                Console.WriteLine("You are logged in");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine("Wrong login or password, try again");
+                return false;
+            }
+
+        }
     }
 }
