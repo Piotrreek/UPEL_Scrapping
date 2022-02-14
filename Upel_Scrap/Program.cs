@@ -14,12 +14,7 @@ namespace Upel_Scrap
         static async Task Main(string[] args)
         {
             using var httpClient = new HttpClient();
-            while (! await SignToWebsite.SignInFun(httpClient))
-            {
-                continue;
-            }
-
-            
+            while (!await SignToWebsite.SignInFun(httpClient)) {}
             int choice = Welcome.Choose();
             do
             {
@@ -34,7 +29,7 @@ namespace Upel_Scrap
                         break;
                     case 5:
                         Console.WriteLine("Logging out ...");
-
+                        await LogOut.LogOutFromWebsite(httpClient);
                         return;
                     default:
                         Console.WriteLine("Bad input, try again");
