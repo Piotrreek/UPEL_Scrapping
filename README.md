@@ -1,7 +1,7 @@
 # UPEL_Scrapping
 This is a projekt to find specific data at UPEL - AGH's platform, where I am learning.
 
-Console after giving input 1: 
+Console after input 1: 
 
 ![image](https://user-images.githubusercontent.com/91609048/154022400-b151a14a-2b75-4aff-8db1-6e6bc270333a.png)
 
